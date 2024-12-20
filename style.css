@@ -210,15 +210,20 @@ footer {
 /* Styles for the contact buttons */
 .contact-button {
   /* Common styles for both buttons */
-  padding: 15px 30px;  /* More padding */
+  padding: 15px 30px;
+  /* More padding */
   font-size: 1.2em;  /* Larger font size */
   border: none;
-  border-radius: 5px; /* Slightly rounded corners */
+  border-radius: 5px;
+  /* Slightly rounded corners */
   cursor: pointer;
-  transition: all 0.3s ease; /* Smooth transitions on hover */
+  transition: all 0.3s ease;
+  /* Smooth transitions on hover */
   margin: 20px; /* Add space between buttons */
-  display: inline-block; /* Ensure proper spacing */
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  display: inline-block;
+  /* Ensure proper spacing */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  /* Subtle shadow */
 }
 
 .email-button {
@@ -227,22 +232,26 @@ footer {
 }
 
 .email-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
+  /* Darker blue on hover */
   transform: translateY(-2px); /* Slight lift on hover */
 }
 
 .call-button {
-  background-color: #28a745; /* Green background */
+  background-color: #28a745;
+  /* Green background */
   color: white;
 }
 
 .call-button:hover {
-  background-color: #1e7e34; /* Darker green on hover */
+  background-color: #1e7e34;
+  /* Darker green on hover */
   transform: translateY(-2px); /* Slight lift on hover */
 }
 
 .contact-options {
-  margin-top: -100px; /* Adjust the value as needed */
+  margin-top: -100px;
+  /* Adjust the value as needed */
   display: flex;
   justify-content: center; /* Center horizontally */
 }
