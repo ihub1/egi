@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esther Generation Initiative - Projects</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Add the following styles to your style.css file */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .project-item {
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer; /* Add cursor style for clickable items */
+    }
+
+    .project-item i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 600px;
+      position: relative; /* Add position relative for close button */
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #aaa;
+      cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Image style to fit in modal */
+    .modal-content img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="logo.png" alt="Logo">
+      </div>
+      <div class="search-icon" onclick="toggleSearch()">
+        <i class="fas fa-search"></i>
+      </div>
+      <button class="menu-toggle" onclick="toggleMenu(event)">☰</button>
+      <ul class="menu" onclick="event.stopPropagation()">
+        <button class="close-menu" onclick="closeMenu()">&times;</button>
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="projects.html"><i class="fas fa-project-diagram"></i> Projects</a></li>
+        <li><a href="admissions.html"><i class="fas fa-user-graduate"></i> Admissions</a></li>
+        <li><a href="donate.html"><i class="fas fa-donate"></i> Donate</a></li>
+        <li><a href="contactus.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="search-container">
+    <button class="close-menu" onclick="closeSearch()">&times;</button>
+      <input type="text" id="search-input" placeholder="Search...">
+      <button id="search-button">Search</button>
+  </div>
+  <section class="hero">
+    <h1>Our Projects</h1>
+    <p>Explore the initiatives that are making a difference.</p>
+  </section>
+  <section class="project-grid">
+    <div class="project-item" onclick="openModal('farmModal')">
+      <i class="fas fa-tractor"></i>
+      <h2>Esther Generation Farms</h2>
+      <p>Cultivating sustainable agriculture and empowering communities.</p>
+    </div>
+    <div class="project-item" onclick="openModal('ministryModal')">
+      <i class="fas fa-church"></i>
+      <h2>Esther Generation Ministry</h2>
+      <p>Spreading hope and faith through outreach and spiritual guidance.</p>
+    </div>
+    <div class="project-item" onclick="openModal('schoolModal')">
+      <i class="fas fa-school"></i>
+      <h2>Esther Generation School</h2>
+      <p>Providing quality education and shaping future leaders.</p>
+    </div>
+    <div class="project-item" onclick="openModal('charityModal')">
+      <i class="fas fa-hand-holding-heart"></i>
+      <h2>Esther Generation Charity</h2>
+      <p>Extending compassion and support to those in need.</p>
+    </div>
+    <div class="project-item" onclick="openModal('trainingModal')">
+      <i class="fas fa-tools"></i>
+      <h2>Esther Generation Vocational Training</h2>
+      <p>Equipping individuals with practical skills for a brighter future.</p>
+    </div>
+  </section>
+  <div id="farmModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('farmModal')">&times;</span>
+      <h2>Esther Generation Farms</h2>
+      <img src="farm.jpg" alt="Esther Generation Farms">
+      <p>
+        At Esther Generation Farm, we believe that the key to producing high-quality pork lies in the well-being of our pigs. Our commitment to maintaining a clean and healthy environment ensures that our pigs are raised in optimal conditions, leading to nutritious and delicious pork for our community.
+        <br><br>
+        <b>Creating a Clean Living Space</b>
+        <br>
+        Hygiene: We prioritize cleanliness in every aspect of our pig farming operation. Our pig pens and housing are regularly cleaned and sanitized to prevent the buildup of waste and minimize the risk of disease. Using non-toxic disinfectants and proper waste management practices, we maintain a hygienic environment that supports the health of our pigs.
+        <br>
+        Ventilation: Proper airflow is crucial for pig health. Our housing is designed with adequate ventilation to ensure a constant exchange of fresh air. This helps prevent respiratory issues and keeps the living area free from excess moisture, which can contribute to disease.
+        <br>
+        Bedding: We use high-quality bedding materials such as straw or wood shavings to keep the pigs comfortable and dry. Clean bedding not only provides a cozy resting place but also absorbs moisture and reduces odors, contributing to a healthier environment.
+        <br><br>
+        <b>Ensuring Health and Welfare</b>
+        <br>
+        Nutrition: Our pigs are fed a balanced and nutritious diet tailored to their growth stages and dietary needs. We use high-quality feed that includes essential vitamins and minerals, ensuring our pigs develop properly and maintain robust health. Our feeding practices are designed to avoid overfeeding and underfeeding, promoting optimal growth and reducing waste.
+        <br>
+        Health Monitoring: Regular health checks are a cornerstone of our farming practices. We work closely with veterinarians to monitor the health of our pigs, administer vaccinations, and manage any health issues promptly. Early detection and treatment of illnesses help prevent the spread of disease and maintain overall herd health.
+        <br>
+        Socialization and Enrichment: Pigs are social animals that thrive in a stimulating environment. We provide opportunities for social interaction and mental stimulation, such as toys and space for rooting and exploring. Enrichment activities reduce stress and encourage natural behaviors, contributing to the overall well-being of our pigs.
+        <br><br>
+        <b>Sustainable Practices</b>
+        <br>
+        Waste Management: Effective waste management is crucial for maintaining a clean environment. We implement composting and recycling practices to manage manure and reduce environmental impact. The compost produced is used to enrich our soil, supporting our farm’s crop production and closing the nutrient loop.
+        <br>
+        Water Quality: Clean water is essential for pig health. We ensure that our pigs have constant access to fresh, clean water, regularly checking and maintaining our water supply systems to prevent contamination.
+        <br><br>
+        <b>From Farm to Table</b>
+        <br>
+        By raising our pigs in a clean and healthy environment, we ensure that the pork produced is of the highest quality. Our dedication to humane and sustainable farming practices results in pork that is not only flavorful but also produced with care and respect for animal welfare.
+        <br><br>
+        <b>Join Us</b>
+        <br>
+        To learn more about our pig farming practices and experience the quality of our pork, visit Esther Generation Farm. We invite you to see firsthand how our commitment to cleanliness and health translates into premium pork products.
+      </p>
+    </div>
+  </div>
+  <div id="ministryModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('ministryModal')">&times;</span>
+      <h2>Esther Generation Ministry</h2>
+      <img src="ministry.jpg" alt="Esther Generation Ministry">
+      <p>
+        Esther Generation Ministry Gospel Outreach to Onzivu Primary School, Arua
+        <br><br>
+        Esther Generation Ministry, a beacon of faith-based initiatives in Arua, Uganda, recently conducted a transformative gospel outreach at Onzivu Primary School. This initiative was driven by the ministry's commitment to holistic development, aiming to enrich the spiritual lives of students, educators, and the broader community.
+        <br><br>
+        The gospel outreach at Onzivu Primary School began with inspirational talks and teachings centred around biblical principles of love, compassion, and hope. Led by passionate ministry leaders and volunteers, these sessions provided spiritual guidance and encouragement to students, emphasizing the importance of faith in their personal growth and academic journey.
+        <br><br>
+        In addition to teaching sessions, Esther Generation Ministry organized uplifting worship and prayer sessions at Onzivu Primary School. These moments of praise and reflection allowed students and staff to connect spiritually, fostering a sense of unity and strengthening their faith foundations.
+        <br><br>
+        Beyond the school environment, Esther Generation Ministry extended its gospel outreach to the surrounding community of Onzivu through the staff of the school. Through outreach programs and community gatherings, the ministry aimed to share the message of hope and salvation, inviting families and community members to embrace the transformative power of faith.
+        <br><br>
+        Through its gospel outreach at Onzivu Primary School, Esther Generation Ministry exemplifies its mission to spread the gospel message and positively impact lives through faith-based initiatives. By integrating spiritual guidance with educational support, the ministry continues to empower individuals and communities in Arua, Uganda, towards a brighter future filled with faith, hope, and love.
+      </p>
+    </div>
+  </div>
+  <div id="schoolModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('schoolModal')">&times;</span>
+      <h2>Esther Generation School</h2>
+      <img src="school.jpeg" alt="Esther Generation School">
+      <p>
+        Esther Generation Nursery/Primary School - Jiako Branch
+        <br><br>
+        Located along Jiako Road, just 200 meters from Rippons Estate in Arua City, Uganda, Esther Generation Nursery/Primary School stands as a beacon of education in the community. Established with a vision to nurture young minds and build a strong educational foundation, the school caters to the academic and developmental needs of children in Arua and its surrounding areas.
+        <br><br>
+        With its strategic location near Rippons Estate, Esther Generation Nursery/Primary School offers convenience and accessibility to families seeking a reputable institution for their children's education. The school's main branch serves as a hub of learning and community engagement, reflecting its mission to empower the next generation with knowledge and skills for a brighter future.
+        <br><br>
+        Nestled in the heart of Arua City, Uganda, the Esther Generation Nursery and Primary School, Jiako Branch, exemplifies a commitment to excellence in education. Situated in a serene environment conducive to learning, the school is renowned for fostering academic achievement and holistic development among its students.
+        <br><br>
+        At Esther Generation, academic excellence is nurtured through a rigorous curriculum tailored to meet national standards set by the Ministry of Education. The school's dedicated faculty members are not only qualified educators but also passionate mentors who inspire and empower students to reach their full potential. They employ modern teaching methodologies that encourage critical thinking, creativity, and collaboration.
+        <br><br>
+        Moreover, Esther Generation, Jiako Branch, boasts state-of-the-art facilities approved by the Ministry of Education. These facilities include well-equipped classrooms, a library stocked with a diverse collection of educational resources, and much more. The school also prioritizes extracurricular activities, providing opportunities for students to participate in sports, arts, and cultural events, thereby fostering a well-rounded educational experience.
+        <br><br>
+        The Jiako Branch of Esther Generation Nursery and Primary School stands as a beacon of educational excellence in Arua City, offering not only quality education but also a nurturing environment where each child's potential is recognized and nurtured. Through its commitment to academic rigor, modern facilities, and holistic development, Esther Generation continues to empower the next generation of leaders and thinkers.
+      </p>
+    </div>
+  </div>
+  <div id="charityModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('charityModal')">&times;</span>
+      <h2>Esther Generation Charity</h2>
+      <img src="charity.jpg" alt="Esther Generation Charity">
+       <p>
+        Esther Generation Charity Projects
+        <br><br>
+        <p>We are a dedicated charity organization committed to transforming the lives of orphans, child mothers, and the
+        disadvantaged within our society. Our mission is to provide hope, support, and sustainable solutions that empower
+        vulnerable individuals to rise above their circumstances and achieve their fullest potential.
+        <br><br>
+        Our Vision
+        <br><br>
+        To create a world where every orphan, child mother, and disadvantaged individual is given the opportunity to
+        thrive, leading dignified lives filled with hope, opportunity, and the promise of a better tomorrow.
+        <br><br>
+        Our Mission
+        <br><br>
+        Esther Generation is devoted to nurturing and uplifting the most vulnerable members of our community through
+        holistic support programs, education, and empowerment initiatives. We aim to break the cycle of poverty and
+        despair, fostering a nurturing environment where dreams can be realized and futures redefined.
+        <br><br>
+        OUR CORE PROGRAMS
+        <br><br>
+        1. Orphan Care and Support
+        <br><br>
+        We provide comprehensive care for orphans, ensuring their basic needs are met, including shelter, nutrition,
+        healthcare, and education. Our loving and supportive environment helps them heal from trauma and develop into
+        well-rounded individuals.
+        <br><br>
+        2. Child Mothers Empowerment
+        <br><br>
+        Understanding the unique challenges faced by child mothers, we offer tailored programs that provide emotional
+        support, education, and vocational training. Our goal is to empower these young mothers to become
+        self-sufficient,
+        confident, and able to provide a better future for themselves and their children.
+        <br><br>
+        3. Community Outreach and Development
+        <br><br>
+        We engage in various community development projects aimed at uplifting disadvantaged individuals. From building
+        schools and healthcare facilities to providing clean water and sanitation, our initiatives are designed to create
+        sustainable improvements in the living conditions of those we serve.
+        <br><br>
+        4. Education and Scholarship Programs
+        <br><br>
+        Education is a cornerstone of our efforts. We offer scholarships and educational resources to ensure that every
+        child, regardless of their background, has access to quality education. Our programs include tutoring,
+        mentorship, and extracurricular activities to foster a love of learning and personal growth.
+        <br><br>
+        5. Health and Well-being Initiatives
+        <br><br>
+        We address the health needs of our beneficiaries through medical camps, regular health check-ups, and
+        partnerships with healthcare providers. Our programs focus on both physical and mental well-being, ensuring a
+        holistic approach to health.
+        <br><br>
+        Impact Stories
+        <br><br>
+        At Esther Generation, we believe in the power of stories to inspire change. Our impact is best illustrated
+        through the success stories of those we have supported. From orphans who have graduated from institutions of
+        higher learning to child mothers who have started their own businesses, these stories are a testament to the
+        resilience of the human spirit and the effectiveness of our programs.
+        <br><br>
+        GET INVOLVED
+        <br><br>
+
+Join us in making a difference. Whether through donations, volunteering, or partnerships, your support is crucial in helping us continue our mission. Together, we can create a brighter future for orphans, child mothers, and the disadvantaged in society.</p>
+    </div>
+  </div>
+  <div id="trainingModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('trainingModal')">&times;</span>
+      <h2>Esther Generation Vocational Training</h2>
+      <p>Coming Soon!</p>
+    </div>
+  </div>
+  <footer>
+    &copy; 2024 Esther Generation Initiative. All rights reserved.
+  </footer>
+  <script src="script.js"></script>
+  <script>
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = "block";
+    }
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = "none";
+    }
+  </script>
+</body>
+</html>

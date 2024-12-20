@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Apply</title>
+      <style>
+         /* apply.css */
+         body {
+         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+         margin: 0;
+         background: linear-gradient(to right, #f4f4f4, #ffffff);
+         /* Subtle gradient background */
+         color: #333;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         min-height: 100vh;
+         /* Ensure the body takes up at least the full viewport height */
+         }
+         #container {
+         max-width: 700px;
+         padding: 20px;
+         background-color: #fff;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         border-radius: 12px;
+         /* Slightly more rounded corners */
+         }
+         h2 {
+         text-align: center;
+         color: #333;
+         font-weight: 600;
+         /* Slightly bolder */
+         }
+         input[type="text"],
+         input[type="email"],
+         input[type="password"],
+         input[type="file"] {
+         width: 100%;
+         padding: 15px;
+         /* Increased padding */
+         margin: 15px 0;
+         border: 1px solid #ddd;
+         border-radius: 8px;
+         box-sizing: border-box;
+         font-size: 16px;
+         /* Slightly larger font size */
+         }
+         label {
+         display: block;
+         margin-bottom: 5px;
+         font-weight: 500;
+         /* Slightly bolder labels */
+         }
+         button {
+         background-color: #007bff;
+         color: white;
+         padding: 14px 20px;
+         /* Slightly more padding */
+         margin: 10px 0;
+         border: none;
+         cursor: pointer;
+         width: 100%;
+         border-radius: 24px;
+         /* More rounded button corners */
+         transition: background-color 0.3s ease;
+         /* Smooth transition for hover effect */
+         font-size: 16px;
+         /* Slightly larger font size */
+         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+         /* Subtle shadow on buttons */
+         }
+         button:hover {
+         background-color: #0056b3;
+         /* Darker blue on hover */
+         }
+         /* Responsive Design */
+         @media screen and (max-width: 600px) {
+         #container {
+         margin: 10px;
+         padding: 10px;
+         }
+         }
+         /* Modal Styles */
+         #loginSignupModal {
+         display: none;
+         /* Hidden by default */
+         position: fixed;
+         /* Stay in place */
+         z-index: 1;
+         /* Sit on top */
+         left: 0;
+         top: 0;
+         width: 100%;
+         /* Full width */
+         height: 100%;
+         /* Full height */
+         overflow: auto;
+         /* Enable scroll if needed */
+         background-color: rgba(0, 0, 0, 0.4);
+         /* Black w/ opacity */
+         backdrop-filter: blur(5px);
+         /* Add blur effect to background */
+         }
+         .modal-content {
+         background-color: #fefefe;
+         margin: 10% auto;
+         /* 15% from the top and centered */
+         padding: 20px;
+         border-radius: 12px;
+         /* Rounded corners for the modal */
+         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+         /* More pronounced shadow effect */
+         width: 320px;
+         /* Slightly wider modal */
+         max-width: 90%;
+         /* Ensure modal doesn't overflow on small screens */
+         }
+         /* Close Button Styles (Optional) */
+         .close {
+         color: #aaa;
+         float: right;
+         font-size: 28px;
+         font-weight: bold;
+         }
+         .close:hover,
+         .close:focus {
+         color: black;
+         text-decoration: none;
+         cursor: pointer;
+         }
+      </style>
+      <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+   </head>
+   <body>
+      <div id="container">
+         <div id="loginSignupModal"></div>
+         <div id="roleSelect" style="display: none;">
+            <h2>Apply as:</h2>
+            <button id="studentBtn">Student</button>
+            <button id="teacherBtn">Teacher</button>
+         </div>
+         <div id="studentForm" style="display: none;">
+            <h2>Students' Application</h2>
+            <form>
+               <input type="text" id="fullName" placeholder="Full Name" required>
+               <label for="resultUpload">Scanned Copy
+               of Result (Optional):</label>
+               <input type="file" id="resultUpload">
+               <label for="recommendationUpload">Recommendation Letter (Optional):</label>
+               <input type="file" id="recommendationUpload">
+               <input type="text" id="nationalID" placeholder="National ID Number (Optional)">
+               <input type="text" id="parentName" placeholder="Parent/Guardian Name" required>
+               <input type="text" id="parentNumber" placeholder="Parent/Guardian Number" required>
+               <button type="submit">Submit</button>
+            </form>
+         </div>
+         <div id="teacherForm" style="display: none;">
+            <h2>Teachers' Application</h2>
+            <form>
+               <input type="email" id="teacherEmail" placeholder="Email" required>
+               <input type="text" id="teacherNationalID" placeholder="National ID Number" required>
+               <label for="cvUpload">CV:</label>
+               <input type="file" id="cvUpload" required>
+               <label for="applicationUpload">Application Letter:</label>
+               <input type="file" id="applicationUpload" required>
+               <label for="frontIDUpload">Front ID:</label>
+               <input type="file" id="frontIDUpload" required>
+               <label for="backIDUpload">Back ID:</label>
+               <input type="file" id="backIDUpload" required>
+               <label for="teacherRecommendationUpload">Recommendation Letter (Optional):</label>
+               <input type="file" id="teacherRecommendationUpload">
+               <input type="text" id="ipAddress" placeholder="IP Number (Optional)">
+               <button type="submit">Submit</button>
+            </form>
+         </div>
+      </div>
+      <script>
+         // apply.js
+         const roleSelect = document.getElementById('roleSelect');
+         const studentBtn = document.getElementById('studentBtn');
+         const teacherBtn = document.getElementById('teacherBtn');
+         const studentForm = document.getElementById('studentForm');
+         const teacherForm = document.getElementById('teacherForm');
+         
+         // Firebase Configuration
+         const firebaseConfig = {
+           apiKey: "AIzaSyC5NBKWmBCsXlQvKj4aOyeqn_98TAk3LGg",
+           authDomain: "login-35894.firebaseapp.com",
+           projectId: "login-35894",
+           storageBucket: "login-35894.firebasestorage.app",
+           messagingSenderId: "927068235495",
+           appId: "1:927068235495:web:b3de1473050f8a237fa442",
+           measurementId: "G-MSG0HC53H1"
+         };
+         
+         // Initialize Firebase
+         firebase.initializeApp(firebaseConfig);
+         const auth = firebase.auth();
+         
+         // Function to open the modal with the login form
+         function openLoginModal() {
+           const modalContent = `
+                 <div class="modal-content">
+                     <h2>Login</h2>
+                     <form id="loginForm">
+                         <input type="email" id="loginEmail" placeholder="Email" required>
+                         <input type="password" id="loginPassword" placeholder="Password" required>
+                         <button type="button" onclick="login()">Login</button>
+                         <button type="button" onclick="openSignupModal()">Signup</button>
+                         <div id="loginError" style="color: red;"></div> </form>
+                 </div>
+             `;
+           document.getElementById('loginSignupModal').innerHTML = modalContent;
+           document.getElementById('loginSignupModal').style.display = 'block';
+         }
+         
+         // Function to open the modal with the signup form
+         function openSignupModal() {
+           const modalContent = `
+                 <div class="modal-content">
+                     <h2>Signup</h2>
+                     <form id="signupForm">
+                         <input type="email" id="signupEmail" placeholder="Email" required>
+                         <input type="password" id="signupPassword" placeholder="Password" required>
+                         <button type="button" onclick="signup()">Signup</button>
+                         <button type="button" onclick="openLoginModal()">Login</button>
+                         <div id="signupError" style="color: red;"></div> </form>
+                 </div>
+             `;
+           document.getElementById('loginSignupModal').innerHTML = modalContent;
+           document.getElementById('loginSignupModal').style.display = 'block';
+         }
+         
+         // Function to show the role selection
+         function showRoleSelect() {
+           document.getElementById('loginSignupModal').style.display = 'none';
+           roleSelect.style.display = 'block';
+         }
+         
+         // Example usage: Open the login modal by default
+         openLoginModal();
+         
+         studentBtn.addEventListener('click', () => {
+           studentForm.style.display = 'block';
+           roleSelect.style.display = 'none';
+         });
+         
+         teacherBtn.addEventListener('click', () => {
+           teacherForm.style.display = 'block';
+           roleSelect.style.display = 'none';
+         });
+         
+         // Firebase Authentication Functions
+         function login() {
+           const email = document.getElementById('loginEmail').value;
+           const password = document.getElementById('loginPassword').value;
+           auth.signInWithEmailAndPassword(email, password)
+             .then((userCredential) => {
+               const user = userCredential.user;
+               console.log('User logged in:', user);
+               showRoleSelect();
+             })
+             .catch((error) => {
+               console.error('Login error:', error);
+         
+               // Check for invalid credentials error
+               if (error.message.includes('auth/invalid-login-credentials')) {
+                 document.getElementById('loginError').textContent = "Invalid Email/Password Entered";
+               } else {
+                 document.getElementById('loginError').textContent = error.message;
+               }
+             });
+         }
+         
+         function signup() {
+           const email = document.getElementById('signupEmail').value;
+           const password = document.getElementById('signupPassword').value;
+           auth.createUserWithEmailAndPassword(email, password)
+             .then((userCredential) => {
+               const user = userCredential.user;
+               console.log('User signed up:', user);
+               showRoleSelect();
+             })
+             .catch((error) => {
+               console.error('Signup error:', error);
+               
+               // Check for invalid email format error
+               if (error.message.includes('auth/invalid-email')) {
+                 document.getElementById('signupError').textContent = "Invalid Email format";
+               } else {
+                 document.getElementById('signupError').textContent = error.message;
+               }
+             });
+         }
+      </script>
+   </body>
+</html>

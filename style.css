@@ -1,0 +1,248 @@
+:root {
+  --primary-color: #000;
+  --secondary-color: #f8f8f8;
+  --text-color: #333;
+  --hover-color: #0071e3;
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.logo img {
+  height: 40px;
+}
+
+.menu {
+  display: none; /* Hide by default on smaller screens */
+  flex-direction: column;
+  /* Align items vertically */
+  justify-content: center; /* Center vertically within the menu */
+  align-items: center;
+  /* Center horizontally within the menu */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-color);
+  z-index: 1000;
+  transition: transform 0.5s ease, opacity 0.5s ease, visibility 0.5s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-100%);
+}
+
+.menu.active {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.menu li {
+  margin: 20px 0;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.menu a:hover {
+  color: var(--hover-color);
+}
+
+.menu-toggle {
+  display: inline-block;
+  cursor: pointer;
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu.active + .menu-toggle {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.close-menu {
+  position: fixed;
+  top: 10px;
+  right: 70px;
+  font-size: 2rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background: white;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.hero p {
+  font-size: 1rem;
+  margin: 20px 0 0;
+  color: #666;
+}
+
+.hero a {
+  display: inline-block;
+  margin-top: 70px; /* Adjusted margin-top to move the button down */
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background-color: var(--hover-color);
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.hero a:hover {
+  background-color: #005bb5;
+}
+
+footer {
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 0.8rem;
+  position: fixed;
+  /* Add this property */
+  bottom: 0; /* Add this property */
+  width: 100%;
+  /* Add this property */
+  z-index: 1000; /* Ensure footer is above other elements */
+}
+
+/* Search icon styles */
+.search-icon {
+  margin-right: 10px;
+  /* Add some space between the icon and the toggle */
+  cursor: pointer;
+  /* Change the cursor to a pointer on hover */
+}
+
+/* Search container styles */
+.search-container {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-color);
+  z-index: 1000;
+  transition: transform 0.5s ease, opacity 0.5s ease, visibility 0.5s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-100%);
+}
+
+.search-container.active {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.search-container input[type="text"] {
+  width: 80%;
+  padding: 15px;
+  margin: 20px 0;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+
+#search-button {
+  background-color: #0071e3;
+  /* Example background color */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Styles for the contact buttons */
+.contact-button {
+  /* Common styles for both buttons */
+  padding: 15px 30px;  /* More padding */
+  font-size: 1.2em;  /* Larger font size */
+  border: none;
+  border-radius: 5px; /* Slightly rounded corners */
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transitions on hover */
+  margin: 20px; /* Add space between buttons */
+  display: inline-block; /* Ensure proper spacing */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.email-button {
+  background-color: #007bff; /* Blue background */
+  color: white;
+}
+
+.email-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.call-button {
+  background-color: #28a745; /* Green background */
+  color: white;
+}
+
+.call-button:hover {
+  background-color: #1e7e34; /* Darker green on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.contact-options {
+  margin-top: -100px; /* Adjust the value as needed */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+}
